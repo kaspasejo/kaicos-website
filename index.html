@@ -110,7 +110,6 @@
   .kai-stage img {
     display: block; width: 100%; height: auto; border-radius: 24px;
     border: 1px solid var(--line);
-    animation: floaty 5.5s ease-in-out infinite;
   }
   .kai-fx {
     position: absolute; inset: 0;
@@ -118,24 +117,29 @@
     border-radius: 24px;
     pointer-events: none;
   }
-  .hero-figure figcaption { font-size: 13px; color: var(--muted); }
 
   /* Kai's life: sway, float, propeller spin, blink */
   @keyframes kaisway {
     from { transform: rotate(-1.2deg); }
     to   { transform: rotate(1deg); }
   }
-  @keyframes floaty {
-    0%, 100% { transform: translateY(0) rotate(-0.6deg); }
-    50% { transform: translateY(-12px) rotate(0.8deg); }
-  }
   .prop-spin {
     transform-origin: 377px 218px;
-    animation: propspin 3.2s linear infinite;
+    animation: propspin 1.3s linear infinite;
   }
   @keyframes propspin {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
+  }
+  .eye-wander {
+    animation: eyewander 9s ease-in-out infinite;
+  }
+  @keyframes eyewander {
+    0%, 22%   { transform: translate(0, 0); }
+    30%, 46%  { transform: translate(-4px, 1px); }
+    54%, 68%  { transform: translate(4px, -2px); }
+    76%, 88%  { transform: translate(-2px, 3px); }
+    96%, 100% { transform: translate(0, 0); }
   }
   .lid {
     transform-box: fill-box;
@@ -148,7 +152,7 @@
     93%, 95.5%    { transform: scaleY(1); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .kai-stage, .kai-stage img, .prop-spin, .lid, .rise { animation: none; }
+    .kai-stage, .kai-stage img, .prop-spin, .lid, .rise, .eye-wander { animation: none; }
     .lid { transform: scaleY(0); }
     .rise { opacity: 1; transform: none; }
   }
@@ -263,12 +267,24 @@
               <path d="M2 0 C9 -8 21 -10 27 -4 C29 -2 29 2 27 4 C21 10 9 8 2 0 Z" fill="#56a069" stroke="#0a0a0a" stroke-width="2.5" transform="translate(377 218) rotate(167)"/>
               <circle cx="377" cy="218" r="5.5" fill="#0a0a0a"/>
             </g>
+            <!-- eyes: covers hide the painted ones, the redrawn pair wanders subtly; lids still blink on top -->
+            <circle cx="404" cy="371" r="33" fill="#cfedf7"/>
+            <circle cx="492" cy="371" r="32" fill="#234576"/>
+            <g class="eye-wander">
+              <circle cx="404" cy="371" r="28" fill="#0a0a0a"/>
+              <circle cx="411" cy="363" r="9" fill="#6fdad7"/>
+              <circle cx="392" cy="375" r="7" fill="#6fdad7"/>
+              <circle cx="407" cy="383" r="3.5" fill="#6fdad7"/>
+              <circle cx="491" cy="371" r="28" fill="#0a0a0a"/>
+              <circle cx="503" cy="364" r="9" fill="#6fdad7"/>
+              <circle cx="484" cy="376" r="7" fill="#6fdad7"/>
+              <circle cx="499" cy="384" r="3.5" fill="#6fdad7"/>
+            </g>
             <!-- eyelids: head-coloured on the face, background-coloured on the floating eye -->
             <circle class="lid" cx="404" cy="371" r="34" fill="#d0eef8"/>
             <circle class="lid" cx="495" cy="371" r="34" fill="#234576"/>
           </svg>
         </div>
-        <figcaption>Kai. Pictured, unbothered.</figcaption>
       </figure>
     </div>
   </div>
